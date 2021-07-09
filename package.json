@@ -19,8 +19,8 @@
   "bugs": {
     "url": "https://github.com/escueladigital/ED-GRID/issues"
   },
-  "license": "ISC",
-  "devDependencies": {
-
-  }
+  "scripts": {
+    "sass": "node-sass --watch ed-grid.scss ed-grid.css"
+  },
+  "license": "ISC"
 }
