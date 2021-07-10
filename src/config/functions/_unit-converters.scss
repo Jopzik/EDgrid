@@ -1,6 +1,5 @@
 // *
 // * Transform px value in to another unit
-// * Transform un valor de píxeles a otra unidad
 // * @param  {number}  $value - value in pixels to convert
 // * @param  {number}  $unit - unit to which you want to convert
 // * @param  {number}  $context - reference unit to convert to em
@@ -20,4 +19,25 @@
 
 @function rem($value) {
   @return convert-px($value, 1rem)
+}
+
+// *
+// * Transform em or rem in to px
+// * @param  {number}  $value - value in rem or em to convert
+// *
+
+@function px($value) {
+  @if type-of($value) == number {
+    @if unit($value) == 'em' {
+      @return ($value / 1em) * 16px;
+    } @else if unit($value) == 'rem' {
+      @return ($value / 1rem) * 16px
+    } @else if unit($value) == 'px' {
+      @return $value;
+    } @else {
+      @error 'Function requires a rem, em or px units as argument'
+    }
+  } @else {
+    @error 'Function requires a rem or em units as argument'
+  }
 }

@@ -1,0 +1,43 @@
+// *
+// * Return true if the breakpoint is part of the core
+// * @param  {number}  $bp - breakpoint
+// *
+// * EXAMPLE
+// * .element {
+// *    @if isCoreBreakpoint(lg) {
+// *      ...
+// *    }
+// *  }
+// *
+
+@function is-core-breakpoint($bp) {
+  @if map-get($breakpoints, $bp) {
+    @return true
+  } @else {
+    @return false
+  }
+}
+
+
+// *
+// * Return true if it's a valid breakpoint (en, rem, px)
+// * @param  {number}  $bp - breakpoint to evaluate
+// *
+
+@function is-valid-breakpoint($bp) {
+  @if type-of($bp) == number and (unit($bp) == 'px' or unit($bp) == 'em' or unit($bp) == 'rem') {
+    @return true
+  } @else {
+    @return false
+  }
+}
+
+
+// *
+// * Get a breakpoint from core
+// * @param  {number}  $bp - breakpoint to get
+// *
+
+@function get-bp($bp) {
+  @return map-get($breakpoints, $bp)
+}

@@ -1,1 +1,9 @@
-@import 'src/styles';
+// config
+// -- variables
+// -- functions
+// -- mixins
+@import 'src/config';
+
+// components
+// -- core-grid
+@import 'src/components';
