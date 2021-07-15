@@ -1,0 +1,70 @@
+.to-left,
+.s-to-left {
+  margin-right: auto; }
+
+.set-to-right,
+.to-right,
+.s-to-right,
+.s-set-to-right {
+  margin-left: auto; }
+
+.to-center,
+.s-to-center {
+  margin-left: auto;
+  margin-right: auto; }
+
+@media screen and (min-width: 640px) {
+  .m-to-left {
+    margin-right: auto; } }
+
+@media screen and (min-width: 640px) {
+  .m-to-right,
+  .m-set-to-right {
+    margin-left: auto; } }
+
+@media screen and (min-width: 640px) {
+  .m-to-center {
+    margin-left: auto;
+    margin-right: auto; } }
+
+@media screen and (min-width: 1024px) {
+  .lg-to-left {
+    margin-right: auto; } }
+
+@media screen and (min-width: 1024px) {
+  .lg-to-right,
+  .lg-set-to-right {
+    margin-left: auto; } }
+
+@media screen and (min-width: 1024px) {
+  .lg-to-center {
+    margin-left: auto;
+    margin-right: auto; } }
+
+@media screen and (min-width: 1440px) {
+  .xl-to-left {
+    margin-right: auto; } }
+
+@media screen and (min-width: 1440px) {
+  .xl-to-right,
+  .xl-set-to-right {
+    margin-left: auto; } }
+
+@media screen and (min-width: 1440px) {
+  .xl-to-center {
+    margin-left: auto;
+    margin-right: auto; } }
+
+@media screen and (min-width: 1920px) {
+  .xxl-to-left {
+    margin-right: auto; } }
+
+@media screen and (min-width: 1920px) {
+  .xxl-to-right,
+  .xxl-set-to-right {
+    margin-left: auto; } }
+
+@media screen and (min-width: 1920px) {
+  .xxl-to-center {
+    margin-left: auto;
+    margin-right: auto; } }

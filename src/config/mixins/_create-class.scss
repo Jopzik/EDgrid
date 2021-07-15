@@ -1,0 +1,60 @@
+// *
+// * Create class (create utility class from a map)
+// * @param  {map}  $properties-map - Properties and styles to set in css class
+// * $map : (
+// *   class-name: (property: value),
+// *   (first-value, second-value) : (property: value),
+// *   other-class-name  : (
+// *     first-property  : value,
+// *     second-property : value,
+// *   )
+// * );
+// *
+// * EXAMPLE
+// * $alignment : (
+// *   to-left : (margin-right: auto),
+// *     (to-right, set-to-right) : (margin-left: auto),
+// *   to-center : (
+// *     margin-left : auto,
+// *     margin-right : auto,
+// *   ),
+// * );
+// *
+// * @include create-class($alignment);
+// *
+
+@mixin create-class($properties-map) {
+  // Go all the breakpoints (s, m, lg, xl, xll)
+  @each $size in $sizes {
+    // Go all the classes in the map
+    @each $classes, $styles in $properties-map {
+      $breakpoint-selector : '';
+      @each $class in $classes {
+        // 1. If $size == s (breakpoint) create a class without breakpoint
+        // 2. Add the previous class created to all use the same styles
+        // 3. Create class using breakpoint and class name (.s-example, .m-example, .lg-example...)
+        $breakpoint-selector : '#{if($size == s, '.#{$class},\a', '')}#{$breakpoint-selector} .#{$size}-#{$class},\a';
+      }
+      // Apply styles from $size breakpoint
+      @include from($size) {
+        #{$breakpoint-selector} {
+          // Set styles from $properties-map
+          @each $style in $styles {
+            #{nth($style, 1)} : nth($style, 2);
+          }
+        }
+      }
+    }
+  }
+}
+
+$alignment : (
+  to-left : (margin-right: auto),
+    (to-right, set-to-right) : (margin-left: auto),
+  to-center : (
+    margin-left : auto,
+    margin-right : auto,
+  ),
+);
+
+@include create-class($alignment);

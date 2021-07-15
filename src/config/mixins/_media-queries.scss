@@ -117,7 +117,7 @@
     }
   }
 
-    // Si solo $to es breakpoint del core
+    // If only $to exist in the EDgrid core
   @else if not is-core-breakpoint($from) and is-core-breakpoint($to) {
     @if is-valid-breakpoint($from) {
       @if px(get-bp($to)) > px($from) {
@@ -132,7 +132,7 @@
     }
   }
 
-    // Si no son breakpoints del core pero son breakpoints válidos (px, em, rem)
+    // If both aren't breakpoints in the EDgrid, but they're valid value (px, em, rem)
   @else if is-valid-breakpoint($from) and is-valid-breakpoint($to) {
     @if px($to) > px($from) {
       @media screen and (min-width : $from) and (max-width : px($to) - 1px) {
@@ -143,7 +143,7 @@
     }
   }
 
-    // Si al menos hay un breakpoint inválido
+    // If almost one breakpoint is not valid
   @else {
     @error 'Arguments (first, second) #{$error-message-bp-no-valid}';
   }
