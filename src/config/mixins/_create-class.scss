@@ -19,7 +19,7 @@
     // Add all class in the same selector separate with come (,) to reduce render styles
     // Also add breakpoint ($size) in the class
     // If it's a variant ($is-variant), add '-#{$variant}' in the class
-    $breakpoint-selector : '#{$base-class}#{$multiple-selector} .#{$size}-#{$class}#{if($is-variant, '-#{$variant}', '')},\a';
+    $multiple-selector : '#{$base-class}#{$multiple-selector} .#{$size}-#{$class}#{if($is-variant, '-#{$variant}', '')},\a';
   }
 
   #{$multiple-selector} {
@@ -93,7 +93,7 @@
 //  gap : gap,
 //);
 //
-//$display  : (
+//$display : (
 //  flex : (display: flex),
 //  block : (display: block),
 //);
