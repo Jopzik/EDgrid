@@ -1,7 +1,41 @@
 // *
+// * Set styles (create selector and set styles from map). It only can be use in create-class() mixin
+// * @param  {string}     $size - Breakpoint in which the styles will begin to be applied
+// * @param  {list}       $classes - Classes to be used to apply styles
+// * @param  {list, map}  $styles - Styles to set
+// * @param  {string}     $variant (optional) - It allows create a class with the value and set a style of this same
+// *
+
+@mixin set-styles($size, $classes, $styles, $variant : '') {
+  $multiple-selector : '';
+  $base-class        : '';
+  $is-variant        : $variant != '';
+
+  @each $class in $classes {
+    // Render class without breakpoint for first-mobile
+    @if $size == s {
+      $base-class : '.#{$class}#{if($is-variant, '-#{$variant}', '')},\a';
+    }
+    // Add all class in the same selector separate with come (,) to reduce render styles
+    // Also add breakpoint ($size) in the class
+    // If it's a variant ($is-variant), add '-#{$variant}' in the class
+    $breakpoint-selector : '#{$base-class}#{$multiple-selector} .#{$size}-#{$class}#{if($is-variant, '-#{$variant}', '')},\a';
+  }
+
+  #{$multiple-selector} {
+    @each $style in $styles {
+      #{nth($style, 1)} : if($is-variant, $variant, nth($style, 2));
+    }
+  }
+}
+
+// *
 // * Create class (create utility class from a map)
 // * @param  {map}  $properties-map - Properties and styles to set in css class
-// * $map : (
+// * @param  {list} $variants (optional) - List of variants to create class n set styles. (Example: 0, 4px, 8px, 12px, 16px...)
+// *
+// * EXAMPLE
+// * $map-without-variants : (
 // *   class-name: (property: value),
 // *   (first-value, second-value) : (property: value),
 // *   other-class-name  : (
@@ -9,52 +43,68 @@
 // *     second-property : value,
 // *   )
 // * );
+// * @include create-class($map-without-variants);
 // *
-// * EXAMPLE
-// * $alignment : (
-// *   to-left : (margin-right: auto),
-// *     (to-right, set-to-right) : (margin-left: auto),
-// *   to-center : (
-// *     margin-left : auto,
-// *     margin-right : auto,
-// *   ),
+// * $gap      : (
+// *   gap-x : row-gap,
+// *   gap-y : column-gap,
+// *   gap : gap,
 // * );
-// *
-// * @include create-class($alignment);
+// * @include create-class($gap, $variants);
 // *
 
-@mixin create-class($properties-map) {
-  // Go all the breakpoints (s, m, lg, xl, xll)
+@mixin create-class($properties-map, $variants: '') {
+  // Go all the breakpoints (s, m, lg, xl, xxl)
   @each $size in $sizes {
     // Go all the classes in the map
     @each $classes, $styles in $properties-map {
-      $breakpoint-selector : '';
-      @each $class in $classes {
-        // 1. If $size == s (breakpoint) create a class without breakpoint
-        // 2. Add the previous class created to all use the same styles
-        // 3. Create class using breakpoint and class name (.s-example, .m-example, .lg-example...)
-        $breakpoint-selector : '#{if($size == s, '.#{$class},\a', '')}#{$breakpoint-selector} .#{$size}-#{$class},\a';
-      }
       // Apply styles from $size breakpoint
       @include from($size) {
-        #{$breakpoint-selector} {
-          // Set styles from $properties-map
-          @each $style in $styles {
-            #{nth($style, 1)} : nth($style, 2);
+        @if length($variants) > 1 {
+          @each $space in $variants {
+            @include set-styles($size, $classes, $styles, $space);
           }
+        } @else {
+          @include set-styles($size, $classes, $styles);
         }
       }
     }
   }
 }
 
-$alignment : (
-  to-left : (margin-right: auto),
-    (to-right, set-to-right) : (margin-left: auto),
-  to-center : (
-    margin-left : auto,
-    margin-right : auto,
-  ),
-);
+//$alignment : (
+//  to-left : (margin-right: auto),
+//    (to-right, set-to-right) : (margin-left: auto),
+//  to-center : (
+//    margin-left : auto,
+//    margin-right : auto,
+//  ),
+//);
 
-@include create-class($alignment);
+//$alignment : (
+//  to-left : margin-right,
+//  (to-right, set-to-right) : margin-left,
+//  to-center : (margin-left, margin-right),
+//);
+
+//$gap      : (
+//  gap-x : row-gap,
+//  gap-y : column-gap,
+//  gap : gap,
+//);
+//
+//$display  : (
+//  flex : (display: flex),
+//  block : (display: block),
+//);
+//
+//$position : (
+//  relative : (position: relative),
+//  absolute : (position: absolute),
+//  sticky : (position: sticky),
+//  fixed : (position: fixed),
+//);
+
+//@include create-class($alignment, map-values($spacing));
+//@include create-class($gap, $spacing);
+//@include create-class($display);

@@ -11,7 +11,7 @@ $breakpoints : (
 
 $sizes : map-keys($breakpoints);
 
-$spacing: (
+$spacing-map : (
   0  : 0,
   1  : 2px,
   2  : 4px,
@@ -31,4 +31,7 @@ $spacing: (
   16 : 112px,
   17 : 128px,
   18 : 256px,
+  19 : initial,
 ) !default;
+
+$spacing : map-values($spacing-map);
