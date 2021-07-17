@@ -1,0 +1,35 @@
+.ed-grid {
+  $margin               : 1rem;
+  display               : grid;
+  grid-template-columns : 1fr;
+  width                 : calc(100% - (#{$margin} * 2));
+  margin-left           : $margin;
+  margin-right          : $margin;
+  max-width             : $max-width;
+
+  @include from($max-width) {
+    width        : 100%;
+    margin-left  : auto;
+    margin-right : auto;
+  }
+
+  .ed-grid,
+  &.full {
+    width        : 100%;
+    max-width    : 100%;
+    margin-right : 0;
+    margin-left  : 0;
+  }
+}
+
+// Grid core system
+@function create-grid() {
+  $grid-map : ();
+  @for $i from 1 through $max-grid-columns {
+    // Example : grid-template-columns : repeat(2, minmax(0, 1fr));
+    $grid-map : map-merge($grid-map, (grid-#{$i} : (grid-template-columns : repeat($i, minmax(0, 1fr)))));
+  }
+  @return $grid-map;
+}
+
+@include create-class(create-grid());
