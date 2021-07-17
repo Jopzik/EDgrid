@@ -1,0 +1,7 @@
+@function max-columns() {
+  $columns : ();
+  @for $i from 1 through $max-grid-columns {
+    $columns : append($columns, $i, comma);
+  }
+  @return $columns;
+}
