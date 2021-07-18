@@ -31,13 +31,15 @@
   }
   @return $grid-map;
 }
+
 @include create-class(create-grid());
 
 // * ----- Column span ----- * //
 @function column-span() {
   $column-span : ();
   @each $column in max-columns() {
-    $column-span : map-merge($column-span, (cols-#{$column} : (grid-column-start : span $column)));
+    // Example : grid-column-end : span 3;
+    $column-span : map-merge($column-span, (cols-#{$column} : (grid-column-end : span $column)));
   }
   $column-extra : (
     cols-full : (grid-column : unquote('1 / -1')),
@@ -46,4 +48,14 @@
   $column-span : map-merge($column-span, $column-extra);
   @return $column-span;
 }
+
 @include create-class(column-span());
+
+
+// * ----- Row and column start ----- * //
+$row-column-start : (
+  x : (grid-column-start),
+  y : (grid-row-start),
+);
+
+@include create-class(variants($row-column-start, max-columns()));
