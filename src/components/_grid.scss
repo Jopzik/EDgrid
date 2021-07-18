@@ -40,14 +40,14 @@
   @each $column in max-columns() {
     // Example : grid-column-end : span 3;
     //         : grid-row-end    : span 2;
-    $column-span : map-merge($span, (#{$class}-#{$column} : (grid-#{$property}-end : span $column)));
+    $span : map-merge($span, (#{$class}-#{$column} : (grid-#{$property}-end : span $column)));
   }
   $column-extra : (
     #{$class}-full : (grid-#{$property} : unquote('1 / -1')),
     #{$class}-auto : (grid-#{$property} : auto),
   );
-  $column-span : map-merge($span, $column-extra);
-  @return $column-span;
+  $span : map-merge($span, $column-extra);
+  @return $span;
 }
 
 @include create-class(column-row-span(cols, column));
