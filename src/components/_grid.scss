@@ -56,8 +56,8 @@
 
 // * ----- Row and column start ----- * //
 $row-column-start : (
-  x : (grid-column-start),
-  y : (grid-row-start),
+  x : grid-column-start,
+  y : grid-row-start,
 );
 
 @include create-class(variants($row-column-start, max-columns()));

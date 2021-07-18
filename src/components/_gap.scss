@@ -1,0 +1,7 @@
+$gap : (
+  gap-x : row-gap,
+  gap-y : column-gap,
+  gap : gap,
+);
+
+@include create-class(variants($gap));
