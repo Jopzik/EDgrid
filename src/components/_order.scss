@@ -1,0 +1,14 @@
+$order : (
+  order : order
+);
+
+$order-extra : (
+  order-0       : (order: 0),
+  order-first   : (order :-999),
+  order-last    : (order :999),
+  order-initial : (order : initial),
+);
+
+$map-order : map-merge(variants($order, max-columns()), $order-extra);
+
+@include create-class($map-order);
