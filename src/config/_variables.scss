@@ -1,5 +1,6 @@
 $max-width        : 1200px !default;
 $max-grid-columns : 12     !default;
+$legacy           : false  !default;
 
 $breakpoints : (
   s   : 0,

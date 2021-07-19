@@ -1,8 +1,14 @@
+$legacy : true;
+
 // config
 // -- variables
 // -- functions
 // -- mixins
 @import 'src/config';
+
+// Legacy
+// -- variables
+@import 'src/legacy';
 
 // components
 // -- base

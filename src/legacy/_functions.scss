@@ -1,0 +1,13 @@
+@function legacy-variants($map) {
+  $variants-map : ();
+  @each $classes, $style in $map {
+    @each $variant, $value in $legacy-spacing {
+      $variant-class : ();
+      @each $class in $classes {
+        $variant-class : append($variant-class, $class - unquote($variant), comma);
+      }
+      $variants-map : map-merge($variants-map, ($variant-class : ($style : $value)));
+    }
+  }
+  @return $variants-map;
+}

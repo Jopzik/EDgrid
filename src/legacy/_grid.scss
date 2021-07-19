@@ -1,0 +1,27 @@
+$legacy-gaps : (
+  gap : --gap,
+);
+
+@if $legacy {
+  $multiple-selector : ();
+  @each $size in $sizes {
+    @each $variant, $style in legacy-variants($legacy-gaps) {
+      $multiple-selector : '#{$multiple-selector}.ed-grid.#{$size}-#{$variant},\a'
+    }
+  }
+
+  #{$multiple-selector} {
+    column-gap : var(--gap);
+  }
+
+  .ed-grid {
+    column-gap : var(--gap);
+    --gap      : 32px;
+
+    &.row-gap,
+    &.rows-gap {
+      row-gap : var(--gap);
+    }
+  }
+  @include create-class(legacy-variants($legacy-gaps));
+}
