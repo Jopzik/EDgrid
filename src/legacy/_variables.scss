@@ -1,3 +1,12 @@
+$legacy-breakpoints : (
+  s   : 0,
+  m   : 640px,
+  lg  : 1024px,
+  xl  : 1400px,
+);
+
+$legacy-sizes : map-keys($legacy-breakpoints);
+
 $legacy-spacing : (
   '05'   : 4px,
   '1'    : 8px,

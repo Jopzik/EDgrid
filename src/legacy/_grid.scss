@@ -4,7 +4,7 @@ $legacy-gaps : (
 
 @if $legacy {
   $multiple-selector : ();
-  @each $size in $sizes {
+  @each $size in $legacy-sizes {
     @each $variant, $style in legacy-variants($legacy-gaps) {
       $multiple-selector : '#{$multiple-selector}.ed-grid.#{$size}-#{$variant},\a'
     }
