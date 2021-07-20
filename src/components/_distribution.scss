@@ -1,0 +1,60 @@
+$vertical-distribution          : (
+  cross-start : (
+    align-items: flex-start,
+    align-content: flex-start,
+  ),
+  cross-center : (
+    align-items: center,
+    align-content: center,
+  ),
+  cross-end: (
+    align-items: flex-end,
+    align-content: flex-end,
+  ),
+  cross-baseline: (
+    align-items: baseline,
+    align-content: baseline,
+  ),
+);
+
+$horizontal-distribution        : (
+  main-start : (
+    justify-content: flex-start,
+  ),
+  main-center: (
+    justify-content: center,
+  ),
+  main-end : (
+    justify-content: flex-end,
+  ),
+  main-justify: (
+    justify-content: space-between,
+  ),
+  main-distribute: (
+    justify-content: space-around,
+  )
+);
+
+$flex-orientation               : (
+  row : (flex-direction: row),
+  row-reverse: (flex-direction: row-reverse),
+  column: (flex-direction: column),
+  column-reverse: (flex-direction: column-reverse)
+);
+
+$orientation-distribution-merge : map-merge(map-merge($horizontal-distribution, $vertical-distribution), $flex-orientation);
+
+$distribution-class             : ();
+@each $distribution in map-keys($orientation-distribution-merge) {
+  $distribution-class : append($distribution-class, '[class*="#{$distribution}"]', comma),
+}
+
+@debug ($distribution-class);
+
+#{$distribution-class} {
+  display   : flex;
+  flex-wrap : wrap;
+}
+
+@include create-class($vertical-distribution);
+@include create-class($horizontal-distribution);
